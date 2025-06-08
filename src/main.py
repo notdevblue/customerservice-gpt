@@ -25,20 +25,20 @@ for table_info_filename in os.listdir(folder_path):
             table_info_file.close()
         required_file_ids.append(file.id)
 
-# liquibase.yaml
-changelog_filename = "liquibase-player.json"
+# # liquibase.yaml
+# changelog_filename = "liquibase-player.json"
 
-# 파일 있는지 확인
-file = next((f for f in uploaded_files if f.filename == changelog_filename), None)
+# # 파일 있는지 확인
+# file = next((f for f in uploaded_files if f.filename == changelog_filename), None)
 
-if file == None: # 파일 없으면 업로드
-    changelog_file = open(f"../{changelog_filename}", "rb")
-    file = client.files.create(
-        file=changelog_file,
-        purpose="assistants"
-    )
-    changelog_file.close()
-required_file_ids.append(file.id)
+# if file == None: # 파일 없으면 업로드
+#     changelog_file = open(f"../{changelog_filename}", "rb")
+#     file = client.files.create(
+#         file=changelog_file,
+#         purpose="assistants"
+#     )
+#     changelog_file.close()
+# required_file_ids.append(file.id)
 
 # gpt 갈구기
 assistant = client.beta.assistants.create(
@@ -55,7 +55,8 @@ thread = client.beta.threads.create(
     messages=[
         {
             "role": "assistant",
-            "content": '`liquibase-player.json` 파일은 "liquibase changeset" 파일이며, csv 파일이 아닌 json 형식의 파일입니다. 테이블들의 컬럼 중 primaryKey 속성을 가진 Id 이름의 컬럼은 User 테이블의 Id 컬럼 값을 무조건 사용하도록 DB에 입력되고 있습니다. 특정한 User의 정보를 알고 싶은 경우, 정보가 있을 것으로 생각되는 테이블의 Id 컬럼을 User 테이블의 Id 값으로 검색하면 됩니다. "수량" 으로는 `Amount` 컬럼을 사용하고, "지금까지 획득한 누적" 의미를 가진 컬럼은 `Acc` 접두사가 붙습니다. 첨부된 파일 중 *TableInfo.md 들은 접두사로 붙는 문자열이 테이블 명이며, 이는 liquibase-player.json 에 작성된 테이블들에 대한 설계 문서입니다. *TableInfo.md 파일은 하나가 아닌 여러 파일로 나눠져 있으므로, 모든 파일을 읽습니다. SQL 질의문 작성에 설계 문서를 참고하세요. 설계 문서 중 테이블 섹션의 표에서 "이름" 항목은 컬럼명을 의미합니다',
+            # "content": '`liquibase-player.json` 파일은 "liquibase changeset" 파일이며, csv 파일이 아닌 json 형식의 파일입니다. 테이블들의 컬럼 중 primaryKey 속성을 가진 Id 이름의 컬럼은 User 테이블의 Id 컬럼 값을 무조건 사용하도록 DB에 입력되고 있습니다. 특정한 User의 정보를 알고 싶은 경우, 정보가 있을 것으로 생각되는 테이블의 Id 컬럼을 User 테이블의 Id 값으로 검색하면 됩니다. "수량" 으로는 `Amount` 컬럼을 사용하고, "지금까지 획득한 누적" 의미를 가진 컬럼은 `Acc` 접두사가 붙습니다. 첨부된 파일 중 *TableInfo.md 들은 접두사로 붙는 문자열이 테이블 명이며, 이는 liquibase-player.json 에 작성된 테이블들에 대한 설계 문서입니다. *TableInfo.md 파일은 하나가 아닌 여러 파일로 나눠져 있으므로, 모든 파일을 읽습니다. SQL 질의문 작성에 설계 문서를 참고하세요. 설계 문서 중 테이블 섹션의 표에서 "이름" 항목은 컬럼명을 의미합니다',
+            "content": '테이블들의 컬럼 중 primaryKey (또는 PK 로 문서에 명시된) 속성을 가진 Id 이름의 컬럼은 User 테이블의 Id 컬럼 값을 무조건 사용하도록 DB에 입력되고 있습니다. 특정한 User의 정보를 알고 싶은 경우, 정보가 있을 것으로 생각되는 테이블의 Id 컬럼을 User 테이블의 Id 값으로 검색하면 됩니다. "수량" 으로는 `Amount` 컬럼을 사용하고, "지금까지 획득한 누적" 의미를 가진 컬럼은 `Acc` 접두사가 붙습니다. 첨부된 파일 중 *TableInfo.md 들은 접두사로 붙는 문자열이 테이블 명이며 작성된 테이블들에 대한 설계 문서입니다. *TableInfo.md 파일은 하나가 아닌 여러 파일로 나눠져 있으므로, 모든 파일을 읽습니다. SQL 질의문 작성에 설계 문서를 참고하세요. 설계 문서 중 테이블 섹션의 표에서 "이름" 항목은 컬럼명을 의미합니다',
         },
         {
             "role": "user",
