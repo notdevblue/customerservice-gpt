@@ -1,6 +1,6 @@
 #!/bin/bash
 
-python -m venv venv
-source venv/bin/activate
+python -m venv venv;
+source ./venv/bin/activate;
 
-pip install OpenAI python-dotenv
+pip install OpenAI python-dotenv;

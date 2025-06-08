@@ -3,5 +3,5 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# assistant = openai
+assistant = openai.
 
