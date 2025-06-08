@@ -1,0 +1,40 @@
+{
+    "databaseChangeLog": [
+      {
+        "changeSet": {
+          "id": "1",
+          "author": "han",
+          "changes": [
+            {
+              "createTable": {
+                "tableName": "User",
+                "columns": [
+                  { "column": { "name": "Id", "type": "BIGINT", "constraints": { "nullable": false, "primaryKey": true } } },
+                  { "column": { "name": "Name", "type": "VARCHAR(32)", "constraints": { "nullable": false } } },
+                  { "column": { "name": "Flags", "type": "BIGINT", "constraints": { "nullable": false } } },
+                  { "column": { "name": "State", "type": "INT", "constraints": { "nullable": false } } },
+                  { "column": { "name": "CreateTime", "type": "DATETIME(3)", "constraints": { "nullable": false } } },
+                  { "column": { "name": "UpdateTime", "type": "DATETIME(3)", "constraints": { "nullable": false } } }
+                ]
+              }
+            },
+            {
+              "createTable": {
+                "tableName": "Point",
+                "columns": [
+                  { "column": { "name": "Id", "type": "BIGINT", "constraints": { "nullable": false, "primaryKey": true } } },
+                  { "column": { "name": "Num", "type": "INT", "constraints": { "nullable": false, "primaryKey": true } } },
+                  { "column": { "name": "AccAmount", "type": "BIGINT", "constraints": { "nullable": false } } },
+                  { "column": { "name": "Amount", "type": "INT", "constraints": { "nullable": false } } },
+                  { "column": { "name": "Flags", "type": "BIGINT", "constraints": { "nullable": false } } },
+                  { "column": { "name": "CreateTime", "type": "DATETIME(3)", "constraints": { "nullable": false } } },
+                  { "column": { "name": "UpdateTime", "type": "DATETIME(3)", "constraints": { "nullable": false } } }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+  
