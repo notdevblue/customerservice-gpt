@@ -1,2 +1,4 @@
 liquibase-4.32.0/
 *.db
+venv/
+*.env
